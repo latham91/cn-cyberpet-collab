@@ -7,7 +7,7 @@ class Character {
         this.boredom = 100;
         this.health = 100;
         this.tiredness = 100;
-        this.mood = mood;
+        this.mood = "happy";
     }
 
     // Methods for the character class
