@@ -47,19 +47,25 @@ class Character {
 
 // Constructing the 3 different playable characters
 class Aaron extends Character {
-    constructor() {}
+    constructor(mood) {
+        super(mood);
+    }
 
     // Unique methods?
 }
 
 class Constantin extends Character {
-    constructor() {}
+    constructor(mood) {
+        super(mood);
+    }
 
     // Unique methods?
 }
 
 class Reuben extends Character {
-    constructor() {}
+    constructor(mood) {
+        super(mood);
+    }
 
     // Unique methods?
 }
