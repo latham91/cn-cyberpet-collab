@@ -4,7 +4,7 @@
 
 ### GIT HELP FOR TEAM
 
-Do not push anything directly to the 'main' branch, make a pull request on github to avoid any merge conflicts.  
+Do not push anything directly to the 'main' branch, make a pull request on github to avoid any merge conflicts.
 Pull requests > New pull request > base: main - compare: <your_branch>
 
 Clone the git repo:  
