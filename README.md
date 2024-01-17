@@ -4,29 +4,29 @@
 
 ### GIT HELP FOR TEAM
 
-Clone the git repo:
+Clone the git repo:  
 `git clone https://github.com/latham91/cn-cyberpet-collab.git`
 
-Add all changes:
+Add all changes:  
 `git add .`
 
-Add specific file(s):
+Add specific file(s):  
 `git add <filename>`
 
-Commit changes:
+Commit changes:  
 `git commit -m "Your commit message"`
 
-Push to remote repo:
+Push to remote repo:  
 `git push origin <branch_name>`
 
-Pull from remote repo:
+Pull from remote repo:  
 `git pull origin <branch_name>`
 
-Create a new branch:
+Create a new branch:  
 `git checkout -b <new_branch_name>`
 
-Change branch:
+Change branch:  
 `git checkout <existing_branch_name>`
 
-Change to main branch:
+Change to main branch:  
 `git checkout main`
