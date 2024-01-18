@@ -1,3 +1,6 @@
+const start = document.querySelector(".btnStart"); // TODO: Remove this later
+const stop = document.querySelector(".btnStop"); // TODO: Remove this later
+
 // Constructing the character class
 class Character {
     constructor(mood) {
@@ -5,6 +8,7 @@ class Character {
 
         // Stats
         this.stats = {
+            health: 100,
             oxygen: 100,
             hunger: 100,
             thirst: 100,
@@ -80,72 +84,90 @@ class Reuben extends Character {
 /////////////////////////// MAIN GAME CODE BELOW ////////////////////////////
 
 // Variables
-let character; // The character the player chooses.
-let isPlaying = false; // Triggers the game loop if true.
+let character = new Aaron("happy");
+let isPlaying = false; // Game is not playing by default
 let loopSpeed = 1000; // 1 second.
 
 // Game loop
-while (isPlaying) {
+const gameLoop = () => {
+    // TODO: Change game view to main game screen
+
+    const loop = setInterval(() => {
+        // If game is not playing, stop the loop
+        if (!isPlaying) {
+            return clearInterval(loop);
+        }
+
+        // Update character stats
+        updateStats();
+    }, loopSpeed);
+};
+
+// Update character stats function
+const updateStats = () => {
+    console.table(character.stats); // TODO: Remove this later
+
     // When characters health reaches 0, game over.
     if (character.stats.health <= 0) {
+        character.stats.health = 0;
         isPlaying = false;
+
+        console.log("Game over!", isPlaying); // TODO: Remove this later
 
         // TODO: Add function to display game over screen
     }
 
-    // Stat ticks every second
-    setInterval(() => {
-        // Base stat deduction. (Mood = "happy")
-        if (character.mood === "happy") {
-            character.stats.health -= 2;
-            character.stats.oxygen -= 2;
-            character.stats.hunger -= 2;
-            character.stats.thirst -= 2;
-            character.stats.energy -= 2;
-            character.stats.boredom -= 2;
-        }
+    // Character stats deduction
+    // Base stat deduction. (Mood = "happy")
+    if (character.mood === "happy") {
+        character.stats.health -= 2;
+        character.stats.oxygen -= 2;
+        character.stats.hunger -= 2;
+        character.stats.thirst -= 2;
+        character.stats.energy -= 2;
+        character.stats.boredom -= 2;
+    }
 
-        // Tired stat deduction. (Mood = "tired")
-        if (character.mood === "tired") {
-            character.stats.health -= 4;
-            character.stats.oxygen -= 4;
-            character.stats.hunger -= 2;
-            character.stats.thirst -= 4;
-            character.stats.energy -= 6;
-            character.stats.boredom -= 2;
-        }
+    // Tired stat deduction. (Mood = "tired")
+    if (character.mood === "tired") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 4;
+        character.stats.hunger -= 2;
+        character.stats.thirst -= 4;
+        character.stats.energy -= 6;
+        character.stats.boredom -= 2;
+    }
 
-        // Hungry stat deduction. (Mood = "hungry")
-        if (character.mood === "hungry") {
-            character.stats.health -= 4;
-            character.stats.oxygen -= 2;
-            character.stats.hunger -= 6;
-            character.stats.thirst -= 2;
-            character.stats.energy -= 4;
-            character.stats.boredom -= 2;
-        }
+    // Hungry stat deduction. (Mood = "hungry")
+    if (character.mood === "hungry") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 2;
+        character.stats.hunger -= 6;
+        character.stats.thirst -= 2;
+        character.stats.energy -= 4;
+        character.stats.boredom -= 2;
+    }
 
-        // Thirsty stat deduction. (Mood = "thirsty")
-        if (character.mood === "thirsty") {
-            character.stats.health -= 4;
-            character.stats.oxygen -= 2;
-            character.stats.hunger -= 2;
-            character.stats.thirst -= 6;
-            character.stats.energy -= 4;
-            character.stats.boredom -= 2;
-        }
+    // Thirsty stat deduction. (Mood = "thirsty")
+    if (character.mood === "thirsty") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 2;
+        character.stats.hunger -= 2;
+        character.stats.thirst -= 6;
+        character.stats.energy -= 4;
+        character.stats.boredom -= 2;
+    }
 
-        // Bored stat deduction. (Mood = "bored")
-        if (character.mood === "bored") {
-            character.stats.health -= 4;
-            character.stats.oxygen -= 2;
-            character.stats.hunger -= 2;
-            character.stats.thirst -= 2;
-            character.stats.energy -= 2;
-            character.stats.boredom -= 6;
-        }
-    }, loopSpeed);
-}
+    // Bored stat deduction. (Mood = "bored")
+    if (character.mood === "bored") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 2;
+        character.stats.hunger -= 2;
+        character.stats.thirst -= 2;
+        character.stats.energy -= 2;
+        character.stats.boredom -= 6;
+    }
+};
 
 // Function to create a character. example: createCharacter("Aaron", "happy");
 const createCharacter = (character, baseMood) => {
@@ -173,3 +195,15 @@ const createCharacter = (character, baseMood) => {
         }
     }
 };
+
+// These are just for testing purposes
+start.addEventListener("click", () => {
+    isPlaying = true;
+    console.log("Game started!", isPlaying);
+    gameLoop();
+});
+
+stop.addEventListener("click", () => {
+    isPlaying = false;
+    console.log("Game stopped!", isPlaying);
+});
