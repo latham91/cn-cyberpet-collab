@@ -80,8 +80,9 @@ class Reuben extends Character {
 /////////////////////////// MAIN GAME CODE BELOW ////////////////////////////
 
 // Variables
-let character;
-let isPlaying = false;
+let character; // The character the player chooses.
+let isPlaying = false; // Triggers the game loop if true.
+let loopSpeed = 1000; // 1 second.
 
 // Game loop
 while (isPlaying) {
@@ -95,7 +96,7 @@ while (isPlaying) {
     // Stat ticks every second
     setInterval(() => {
         // Base stat deduction. (Mood = "happy")
-        if (mood === "happy") {
+        if (character.mood === "happy") {
             character.stats.health -= 2;
             character.stats.oxygen -= 2;
             character.stats.hunger -= 2;
@@ -105,7 +106,7 @@ while (isPlaying) {
         }
 
         // Tired stat deduction. (Mood = "tired")
-        if (mood === "tired") {
+        if (character.mood === "tired") {
             character.stats.health -= 4;
             character.stats.oxygen -= 4;
             character.stats.hunger -= 2;
@@ -115,7 +116,7 @@ while (isPlaying) {
         }
 
         // Hungry stat deduction. (Mood = "hungry")
-        if (mood === "hungry") {
+        if (character.mood === "hungry") {
             character.stats.health -= 4;
             character.stats.oxygen -= 2;
             character.stats.hunger -= 6;
@@ -125,7 +126,7 @@ while (isPlaying) {
         }
 
         // Thirsty stat deduction. (Mood = "thirsty")
-        if (mood === "thirsty") {
+        if (character.mood === "thirsty") {
             character.stats.health -= 4;
             character.stats.oxygen -= 2;
             character.stats.hunger -= 2;
@@ -135,7 +136,7 @@ while (isPlaying) {
         }
 
         // Bored stat deduction. (Mood = "bored")
-        if (mood === "bored") {
+        if (character.mood === "bored") {
             character.stats.health -= 4;
             character.stats.oxygen -= 2;
             character.stats.hunger -= 2;
@@ -143,20 +144,32 @@ while (isPlaying) {
             character.stats.energy -= 2;
             character.stats.boredom -= 6;
         }
-    }, 1000);
+    }, loopSpeed);
 }
 
 // Function to create a character. example: createCharacter("Aaron", "happy");
 const createCharacter = (character, baseMood) => {
     if (character === "Aaron") {
-        character = new Aaron(baseMood);
+        if (!baseMood) {
+            character = new Aaron("happy");
+        } else {
+            character = new Aaron(baseMood);
+        }
     }
 
     if (character === "Constantin") {
-        character = new Constantin(baseMood);
+        if (!baseMood) {
+            character = new Constantin("happy");
+        } else {
+            character = new Constantin(baseMood);
+        }
     }
 
     if (character === "Reuben") {
-        character = new Reuben(baseMood);
+        if (!baseMood) {
+            character = new Reuben("happy");
+        } else {
+            character = new Reuben(baseMood);
+        }
     }
 };
