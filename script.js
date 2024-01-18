@@ -1,13 +1,16 @@
 // Constructing the character class
 class Character {
     constructor(mood) {
-        this.oxygen = 100;
-        this.hunger = 100;
-        this.thirst = 100;
-        this.boredom = 100;
-        this.health = 100;
-        this.tiredness = 100;
-        this.mood = "happy";
+        this.mood = mood;
+
+        // Stats
+        this.stats = {
+            oxygen: 100,
+            hunger: 100,
+            thirst: 100,
+            tiredness: 100,
+            boredom: 100,
+        };
     }
 
     // Methods for the character class
