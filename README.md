@@ -7,6 +7,11 @@
 Do not push anything directly to the 'main' branch, make a pull request on github to avoid any merge conflicts.
 Pull requests > New pull request > base: main - compare: <your_branch>
 
+Before you push anything to your own branch using  
+`git push origin <your_branch>`  
+make sure you pull from the main branch first by using  
+`git pull origin main`
+
 Clone the git repo:  
 `git clone https://github.com/latham91/cn-cyberpet-collab.git`
 
