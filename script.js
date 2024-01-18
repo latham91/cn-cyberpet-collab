@@ -8,7 +8,7 @@ class Character {
             oxygen: 100,
             hunger: 100,
             thirst: 100,
-            tiredness: 100,
+            energy: 100,
             boredom: 100,
         };
     }
@@ -17,34 +17,34 @@ class Character {
     // (refill oxygen, eat, drink, exercise, sleep)
     // TODO: Will adjust numbers later
     refillOxygen() {
-        this.oxygen += 25;
-        this.tiredness -= 25;
+        this.stats.oxygen += 25;
+        this.stats.energy -= 25;
     }
 
     eat() {
-        this.hunger += 25;
-        this.thirst -= 25;
-        this.tiredness -= 25;
+        this.stats.hunger += 25;
+        this.stats.thirst -= 25;
+        this.stats.energy -= 25;
     }
 
     drink() {
-        this.thirst += 25;
-        this.hunger -= 25;
-        this.tiredness -= 25;
+        this.stats.thirst += 25;
+        this.stats.hunger -= 25;
+        this.stats.energy -= 25;
     }
 
     exercise() {
-        this.tiredness -= 25;
-        this.hunger -= 25;
-        this.thirst -= 25;
-        this.boredom += 25;
+        this.stats.energy -= 25;
+        this.stats.hunger -= 25;
+        this.stats.thirst -= 25;
+        this.stats.boredom += 25;
     }
 
     sleep() {
-        this.tiredness += 25;
-        this.hunger -= 25;
-        this.thirst -= 25;
-        this.boredom -= 25;
+        this.stats.energy += 25;
+        this.stats.hunger -= 25;
+        this.stats.thirst -= 25;
+        this.stats.boredom -= 25;
     }
 }
 
