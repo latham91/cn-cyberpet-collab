@@ -77,25 +77,13 @@ class Reuben extends Character {
     // Unique methods?
 }
 
+/////////////////////////// MAIN GAME CODE BELOW ////////////////////////////
+
 // Variables
 let character;
 let isPlaying = false;
 
-// Function to create a character. example: createCharacter("Aaron", "happy");
-const createCharacter = (character, baseMood) => {
-    if (character === "Aaron") {
-        character = new Aaron(baseMood);
-    }
-
-    if (character === "Constantin") {
-        character = new Constantin(baseMood);
-    }
-
-    if (character === "Reuben") {
-        character = new Reuben(baseMood);
-    }
-};
-
+// Game loop
 while (isPlaying) {
     // When characters health reaches 0, game over.
     if (character.stats.health <= 0) {
@@ -157,3 +145,18 @@ while (isPlaying) {
         }
     }, 1000);
 }
+
+// Function to create a character. example: createCharacter("Aaron", "happy");
+const createCharacter = (character, baseMood) => {
+    if (character === "Aaron") {
+        character = new Aaron(baseMood);
+    }
+
+    if (character === "Constantin") {
+        character = new Constantin(baseMood);
+    }
+
+    if (character === "Reuben") {
+        character = new Reuben(baseMood);
+    }
+};
