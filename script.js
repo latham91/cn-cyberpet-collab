@@ -21,23 +21,71 @@ class Character {
     // (refill oxygen, eat, drink, exercise, sleep)
     // TODO: Will adjust numbers later
     refillOxygen() {
+        if (this.stats.oxygen >= 75) {
+            return (this.stats.oxygen = 100);
+        }
+
+        if (this.stats.energy <= 25) {
+            return (this.stats.energy = 0);
+        }
+
         this.stats.oxygen += 25;
         this.stats.energy -= 25;
     }
 
     eat() {
+        if (this.stats.hunger >= 75) {
+            return (this.stats.hunger = 100);
+        }
+
+        if (this.stats.energy <= 25) {
+            return (this.stats.energy = 0);
+        }
+
+        if (this.stats.thirst <= 25) {
+            return (this.stats.thirst = 0);
+        }
+
         this.stats.hunger += 25;
         this.stats.thirst -= 25;
         this.stats.energy -= 25;
     }
 
     drink() {
+        if (this.stats.thirst >= 75) {
+            return (this.stats.thirst = 100);
+        }
+
+        if (this.stats.energy <= 25) {
+            return (this.stats.energy = 0);
+        }
+
+        if (this.stats.hunger <= 25) {
+            return (this.stats.hunger = 0);
+        }
+
         this.stats.thirst += 25;
         this.stats.hunger -= 25;
         this.stats.energy -= 25;
     }
 
     exercise() {
+        if (this.stats.energy <= 25) {
+            return (this.stats.energy = 0);
+        }
+
+        if (this.stats.hunger <= 25) {
+            return (this.stats.hunger = 0);
+        }
+
+        if (this.stats.thirst <= 25) {
+            return (this.stats.thirst = 0);
+        }
+
+        if (this.stats.boredom >= 75) {
+            return (this.stats.boredom = 100);
+        }
+
         this.stats.energy -= 25;
         this.stats.hunger -= 25;
         this.stats.thirst -= 25;
@@ -45,13 +93,29 @@ class Character {
     }
 
     sleep() {
+        if (this.stats.energy >= 75) {
+            return (this.stats.energy = 100);
+        }
+
+        if (this.stats.hunger <= 25) {
+            return (this.stats.hunger = 0);
+        }
+
+        if (this.stats.thirst <= 25) {
+            return (this.stats.thirst = 0);
+        }
+
+        if (this.stats.boredom <= 25) {
+            return (this.stats.boredom = 0);
+        }
+
         this.stats.energy += 25;
         this.stats.hunger -= 25;
         this.stats.thirst -= 25;
         this.stats.boredom -= 25;
     }
 
-    mood(mood) {
+    changeMood(mood) {
         this.mood = mood;
     }
 }
@@ -86,11 +150,11 @@ class Reuben extends Character {
 // Variables
 let character = new Aaron("happy");
 let isPlaying = false; // Game is not playing by default
-let tickRate = 1000; // 1 second.
+let tickRate = 1000; // 1 second. (1000 milliseconds)
 
 // Game loop
 const gameLoop = () => {
-    // TODO: Change game view to main game screen
+    // TODO: Change game view to main game screen function
 
     const loop = setInterval(() => {
         // If game is not playing, stop the loop
