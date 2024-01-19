@@ -147,7 +147,7 @@ class Reuben extends Character {
 // Variables
 let character = new Aaron("happy");
 let isPlaying = false; // Game is not playing by default
-let tickRate = 100; // 1 second. (1000 milliseconds)
+let tickRate = 1000; // 1 second. (1000 milliseconds)
 
 // Game loop
 const gameLoop = () => {
@@ -185,12 +185,12 @@ const updateStats = () => {
     boredom.textContent = character.stats.boredom;
 
     // Stat bars styling
-    health.style.background = `linear-gradient(to right, crimson ${character.stats.health}%, #ffffff ${character.stats.health}%)`;
-    oxygen.style.background = `linear-gradient(to right, #F8E559 ${character.stats.oxygen}%, #ffffff ${character.stats.oxygen}%)`;
-    hunger.style.background = `linear-gradient(to right, #FF9843 ${character.stats.hunger}%, #ffffff ${character.stats.hunger}%)`;
-    thirst.style.background = `linear-gradient(to right, #86A7FC ${character.stats.thirst}%, #ffffff ${character.stats.thirst}%)`;
-    energy.style.background = `linear-gradient(to right, #9ADE7B ${character.stats.energy}%, #ffffff ${character.stats.energy}%)`;
-    boredom.style.background = `linear-gradient(to right, #BEADFA ${character.stats.boredom}%, #ffffff ${character.stats.boredom}%)`;
+    health.style.background = `linear-gradient(to right, #ff3838 ${character.stats.health}%, #ffffff ${character.stats.health}%)`;
+    oxygen.style.background = `linear-gradient(to right, #00d1df ${character.stats.oxygen}%, #ffffff ${character.stats.oxygen}%)`;
+    hunger.style.background = `linear-gradient(to right, #ff8900 ${character.stats.hunger}%, #ffffff ${character.stats.hunger}%)`;
+    thirst.style.background = `linear-gradient(to right, #0064f8 ${character.stats.thirst}%, #ffffff ${character.stats.thirst}%)`;
+    energy.style.background = `linear-gradient(to right, #03c371 ${character.stats.energy}%, #ffffff ${character.stats.energy}%)`;
+    boredom.style.background = `linear-gradient(to right, #6615cd ${character.stats.boredom}%, #ffffff ${character.stats.boredom}%)`;
 
     // When characters health reaches 0, game over.
     if (character.stats.health <= 0) {
@@ -200,6 +200,23 @@ const updateStats = () => {
         console.log("Game over!", isPlaying); // TODO: Remove this later (for testing purposes)
 
         // TODO: Add function to display game over screen
+    }
+
+    // Character mood changes
+    if (character.stats.hunger <= 50) {
+        character.changeMood("hungry");
+    }
+
+    if (character.stats.thirst <= 50) {
+        character.changeMood("thirsty");
+    }
+
+    if (character.stats.energy <= 50) {
+        character.changeMood("tired");
+    }
+
+    if (character.stats.boredom <= 50) {
+        character.changeMood("bored");
     }
 
     // Character stats deduction
@@ -215,7 +232,7 @@ const updateStats = () => {
 
     // Tired stat deduction. (Mood = "tired")
     if (character.mood === "tired") {
-        character.stats.health -= 4;
+        character.stats.health -= 6;
         character.stats.oxygen -= 4;
         character.stats.hunger -= 2;
         character.stats.thirst -= 4;
@@ -225,7 +242,7 @@ const updateStats = () => {
 
     // Hungry stat deduction. (Mood = "hungry")
     if (character.mood === "hungry") {
-        character.stats.health -= 4;
+        character.stats.health -= 6;
         character.stats.oxygen -= 2;
         character.stats.hunger -= 6;
         character.stats.thirst -= 2;
@@ -235,7 +252,7 @@ const updateStats = () => {
 
     // Thirsty stat deduction. (Mood = "thirsty")
     if (character.mood === "thirsty") {
-        character.stats.health -= 4;
+        character.stats.health -= 6;
         character.stats.oxygen -= 2;
         character.stats.hunger -= 2;
         character.stats.thirst -= 6;
@@ -245,7 +262,7 @@ const updateStats = () => {
 
     // Bored stat deduction. (Mood = "bored")
     if (character.mood === "bored") {
-        character.stats.health -= 4;
+        character.stats.health -= 6;
         character.stats.oxygen -= 2;
         character.stats.hunger -= 2;
         character.stats.thirst -= 2;
@@ -285,3 +302,11 @@ const createCharacter = (character, baseMood) => {
 const closeModal = () => {
     document.querySelector(".modalBackground").style.display = "none";
 };
+
+// Refill Oxygen
+
+// Eat
+
+// Drink
+
+// Exercise
