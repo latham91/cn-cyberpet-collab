@@ -271,3 +271,15 @@ stop.addEventListener("click", () => {
     isPlaying = false;
     console.log("Game stopped!", isPlaying);
 });
+
+
+// open modal 
+const openModal = () => {
+  document.querySelector('.modalContainer').style.display = 'flex';
+};
+
+// Close modal
+const closeModal = () => {
+  document.querySelector('.modalContainer').style.display = 'none';
+};
+
