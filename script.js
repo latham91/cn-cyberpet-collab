@@ -4,6 +4,9 @@ const btnEat = document.querySelector(".btnEat");
 const btnDrink = document.querySelector(".btnDrink");
 const btnExercise = document.querySelector(".btnExercise");
 const btnSleep = document.querySelector(".btnSleep");
+const btnRestart = document.querySelector(".btnRestart");
+const gameoverScreen = document.querySelector(".gameoverScreenContainer");
+const gameScreen = document.querySelector(".gameScreenContainer");
 
 // Constructing the character class
 class Character {
@@ -157,7 +160,7 @@ class Reuben extends Character {
 /////////////////////////// MAIN GAME CODE BELOW ////////////////////////////
 
 // Variables
-let character = new Aaron("happy");
+let character; // Character variable
 let isPlaying = false; // Game is not playing by default
 let tickRate = 1000; // 1 second. (1000 milliseconds)
 
@@ -174,6 +177,18 @@ const gameLoop = () => {
         // Update character stats every game tick
         updateStats();
     }, tickRate);
+};
+
+const gameOver = () => {
+    gameoverScreen.style.display = "flex";
+    gameScreen.style.display = "none";
+
+    // disable all buttons
+    btnOxygen.disabled = true;
+    btnEat.disabled = true;
+    btnDrink.disabled = true;
+    btnExercise.disabled = true;
+    btnSleep.disabled = true;
 };
 
 // Update character stats function
@@ -219,6 +234,7 @@ const updateStats = () => {
         console.log("Game over!", isPlaying); // TODO: Remove this later (for testing purposes)
 
         // TODO: Add function to display game over screen
+        gameOver();
     }
 
     // Remove warning flashing animation and speech buble when stat is above 50
@@ -434,6 +450,11 @@ btnSleep.addEventListener("click", () => {
         btnSleep.textContent = "Sleep";
         btnSleep.disabled = false;
     }, 500);
+});
+
+// Restart game
+btnRestart.addEventListener("click", () => {
+    window.location.reload();
 });
 
 gameLoop();
