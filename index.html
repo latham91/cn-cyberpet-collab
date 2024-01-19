@@ -8,37 +8,48 @@
     </head>
     <body>
         <main id="app">
-            <!-- TODO: Character selection screen -->
+            <!-- TODO: Character selection screena -->
 
             <!-- TODO: Main game screen -->
 
             <!-- TODO: Game over screen -->
-
-            <!-- TODO: Remove these buttons later after testing -->
-            <button class="btnStart">Start</button>
-            <button class="btnStop">Stop</button>
-            <!--  -->
         </main>
 
         <!-- MODAL HTML CODE BELOW -->
 
-      
-
-        <div class="container">
-
-        
-            <button class="triggerButton" onclick="openModal()">Game modal</button>
-          
-            
-            <div id="gameModal" class="modalContainer">
-            
-              <div class="modalContent">
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2>CyberPet</h2>
-                <p>situation and character descriptions</p>
-                
-              </div>
+        <div class="modalBackground">
+            <div class="modalContainer">
+                <span class="modalClose" onclick="closeModal()">&times;</span>
+                <div class="modalContent">
+                    <h2>Life on Mars</h2>
+                    <p>
+                        Welcome to "Life on Mars," a captivating gaming experience set in the year 3024. Immerse
+                        yourself in the Martian perspective as you embark on a unique tamagotchi-style journey where
+                        humans take center stage. Your mission? To ensure the survival and well-being of these digital
+                        humans by managing crucial stats in this futuristic adventure.
+                        <br />
+                        <br />
+                        In this advanced Martian society, you'll face the challenges of caring for virtual humans with
+                        needs as diverse as Health, Oxygen, Hunger, Thirst, energy, and Boredom. Navigate through
+                        Earth's historical events, making strategic decisions to maintain the delicate balance of these
+                        essential stats.
+                        <br />
+                        <br />
+                        Keep a close eye on their Health to ensure they stay robust and resilient. Manage their Oxygen
+                        levels for survival on Earth. Satisfy their Hunger and Thirst to keep them nourished and
+                        hydrated. Combat Fatigue and maintain their energy levels and mental acuity. Additionally, ward
+                        off Boredom to support their overall well-being. As you progress, explore the consequences of
+                        your choices, shaping the destiny of these virtual humans against the backdrop of Earth's past.
+                        <br />
+                        <br />
+                        Can you master the intricacies of "Life on Mars" and lead your digital humans through the
+                        challenges of history? The fate of these characters rests in your hands as you embark on a
+                        unique and captivating journey through time and space.
+                    </p>
+                </div>
+                <button class="modalCloseBtn" onclick="closeModal()">Continue</button>
             </div>
+        </div>
 
         <script src="script.js"></script>
     </body>

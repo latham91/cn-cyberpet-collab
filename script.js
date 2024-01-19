@@ -1,6 +1,3 @@
-const start = document.querySelector(".btnStart"); // TODO: Remove this later
-const stop = document.querySelector(".btnStop"); // TODO: Remove this later
-
 // Constructing the character class
 class Character {
     constructor(mood) {
@@ -260,26 +257,7 @@ const createCharacter = (character, baseMood) => {
     }
 };
 
-// These are just for testing purposes
-start.addEventListener("click", () => {
-    isPlaying = true;
-    console.log("Game started!", isPlaying);
-    gameLoop();
-});
-
-stop.addEventListener("click", () => {
-    isPlaying = false;
-    console.log("Game stopped!", isPlaying);
-});
-
-
-// open modal 
-const openModal = () => {
-  document.querySelector('.modalContainer').style.display = 'flex';
-};
-
 // Close modal
 const closeModal = () => {
-  document.querySelector('.modalContainer').style.display = 'none';
+    document.querySelector(".modalBackground").style.display = "none";
 };
-
