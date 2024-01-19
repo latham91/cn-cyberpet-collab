@@ -86,7 +86,7 @@ class Reuben extends Character {
 // Variables
 let character = new Aaron("happy");
 let isPlaying = false; // Game is not playing by default
-let loopSpeed = 1000; // 1 second.
+let tickRate = 1000; // 1 second.
 
 // Game loop
 const gameLoop = () => {
@@ -98,21 +98,21 @@ const gameLoop = () => {
             return clearInterval(loop);
         }
 
-        // Update character stats
+        // Update character stats every game tick
         updateStats();
-    }, loopSpeed);
+    }, tickRate);
 };
 
 // Update character stats function
 const updateStats = () => {
-    console.table(character.stats); // TODO: Remove this later
+    console.table(character.stats); // TODO: Remove this later (for testing purposes)
 
     // When characters health reaches 0, game over.
     if (character.stats.health <= 0) {
         character.stats.health = 0;
         isPlaying = false;
 
-        console.log("Game over!", isPlaying); // TODO: Remove this later
+        console.log("Game over!", isPlaying); // TODO: Remove this later (for testing purposes)
 
         // TODO: Add function to display game over screen
     }
