@@ -147,7 +147,7 @@ class Reuben extends Character {
 // Variables
 let character = new Aaron("happy");
 let isPlaying = false; // Game is not playing by default
-let tickRate = 1000; // 1 second. (1000 milliseconds)
+let tickRate = 100; // 1 second. (1000 milliseconds)
 
 // Game loop
 const gameLoop = () => {
@@ -167,6 +167,30 @@ const gameLoop = () => {
 // Update character stats function
 const updateStats = () => {
     console.table(character.stats); // TODO: Remove this later (for testing purposes)
+
+    // Select the character stats elements
+    const health = document.querySelector(".health");
+    const oxygen = document.querySelector(".oxygen");
+    const hunger = document.querySelector(".hunger");
+    const thirst = document.querySelector(".thirst");
+    const energy = document.querySelector(".energy");
+    const boredom = document.querySelector(".boredom");
+
+    // Update the character stats elements
+    health.textContent = character.stats.health;
+    oxygen.textContent = character.stats.oxygen;
+    hunger.textContent = character.stats.hunger;
+    thirst.textContent = character.stats.thirst;
+    energy.textContent = character.stats.energy;
+    boredom.textContent = character.stats.boredom;
+
+    // Stat bars styling
+    health.style.background = `linear-gradient(to right, crimson ${character.stats.health}%, #ffffff ${character.stats.health}%)`;
+    oxygen.style.background = `linear-gradient(to right, #F8E559 ${character.stats.oxygen}%, #ffffff ${character.stats.oxygen}%)`;
+    hunger.style.background = `linear-gradient(to right, #FF9843 ${character.stats.hunger}%, #ffffff ${character.stats.hunger}%)`;
+    thirst.style.background = `linear-gradient(to right, #86A7FC ${character.stats.thirst}%, #ffffff ${character.stats.thirst}%)`;
+    energy.style.background = `linear-gradient(to right, #9ADE7B ${character.stats.energy}%, #ffffff ${character.stats.energy}%)`;
+    boredom.style.background = `linear-gradient(to right, #BEADFA ${character.stats.boredom}%, #ffffff ${character.stats.boredom}%)`;
 
     // When characters health reaches 0, game over.
     if (character.stats.health <= 0) {
