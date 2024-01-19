@@ -1,3 +1,10 @@
+// Element selectors
+const btnOxygen = document.querySelector(".btnOxygen");
+const btnEat = document.querySelector(".btnEat");
+const btnDrink = document.querySelector(".btnDrink");
+const btnExercise = document.querySelector(".btnExercise");
+const btnSleep = document.querySelector(".btnSleep");
+
 // Constructing the character class
 class Character {
     constructor(mood) {
@@ -18,16 +25,17 @@ class Character {
     // (refill oxygen, eat, drink, exercise, sleep)
     // TODO: Will adjust numbers later
     refillOxygen() {
-        if (this.stats.oxygen >= 75) {
+        if (this.stats.oxygen >= 50) {
             return (this.stats.oxygen = 100);
         }
 
-        if (this.stats.energy <= 25) {
+        if (this.stats.energy <= 10) {
             return (this.stats.energy = 0);
         }
 
-        this.stats.oxygen += 25;
-        this.stats.energy -= 25;
+        this.stats.oxygen += 50;
+        this.stats.energy -= 10;
+        this.stats.health += 10;
     }
 
     eat() {
@@ -35,17 +43,18 @@ class Character {
             return (this.stats.hunger = 100);
         }
 
-        if (this.stats.energy <= 25) {
+        if (this.stats.energy <= 4) {
             return (this.stats.energy = 0);
         }
 
-        if (this.stats.thirst <= 25) {
+        if (this.stats.thirst <= 10) {
             return (this.stats.thirst = 0);
         }
 
         this.stats.hunger += 25;
-        this.stats.thirst -= 25;
-        this.stats.energy -= 25;
+        this.stats.health += 10;
+        this.stats.thirst -= 10;
+        this.stats.energy -= 4;
     }
 
     drink() {
@@ -53,29 +62,30 @@ class Character {
             return (this.stats.thirst = 100);
         }
 
-        if (this.stats.energy <= 25) {
+        if (this.stats.energy <= 6) {
             return (this.stats.energy = 0);
         }
 
-        if (this.stats.hunger <= 25) {
+        if (this.stats.hunger <= 6) {
             return (this.stats.hunger = 0);
         }
 
         this.stats.thirst += 25;
-        this.stats.hunger -= 25;
-        this.stats.energy -= 25;
+        this.stats.health += 10;
+        this.stats.hunger -= 6;
+        this.stats.energy -= 6;
     }
 
     exercise() {
-        if (this.stats.energy <= 25) {
+        if (this.stats.energy <= 20) {
             return (this.stats.energy = 0);
         }
 
-        if (this.stats.hunger <= 25) {
+        if (this.stats.hunger <= 10) {
             return (this.stats.hunger = 0);
         }
 
-        if (this.stats.thirst <= 25) {
+        if (this.stats.thirst <= 10) {
             return (this.stats.thirst = 0);
         }
 
@@ -83,10 +93,11 @@ class Character {
             return (this.stats.boredom = 100);
         }
 
-        this.stats.energy -= 25;
-        this.stats.hunger -= 25;
-        this.stats.thirst -= 25;
+        this.stats.energy -= 20;
+        this.stats.hunger -= 10;
+        this.stats.thirst -= 10;
         this.stats.boredom += 25;
+        this.stats.health += 10;
     }
 
     sleep() {
@@ -106,10 +117,11 @@ class Character {
             return (this.stats.boredom = 0);
         }
 
-        this.stats.energy += 25;
-        this.stats.hunger -= 25;
-        this.stats.thirst -= 25;
-        this.stats.boredom -= 25;
+        this.stats.energy += 50;
+        this.stats.health += 10;
+        this.stats.hunger -= 10;
+        this.stats.thirst -= 10;
+        this.stats.boredom -= 10;
     }
 
     changeMood(mood) {
@@ -197,37 +209,93 @@ const updateStats = () => {
         character.stats.health = 0;
         isPlaying = false;
 
+        // Disable all buttons
+        btnOxygen.disabled = true;
+        btnEat.disabled = true;
+        btnDrink.disabled = true;
+        btnExercise.disabled = true;
+        btnSleep.disabled = true;
+
         console.log("Game over!", isPlaying); // TODO: Remove this later (for testing purposes)
 
         // TODO: Add function to display game over screen
     }
 
+    // Remove warning flashing animation and speech buble when stat is above 50
+    if (character.stats.health > 50) {
+        document.querySelector(".health").style.animation = "none";
+        document.querySelector(".speechOxygen").style.display = "none";
+    }
+
+    if (character.stats.hunger > 50) {
+        document.querySelector(".hunger").style.animation = "none";
+        document.querySelector(".speechHunger").style.display = "none";
+    }
+
+    if (character.stats.thirst > 50) {
+        document.querySelector(".thirst").style.animation = "none";
+        document.querySelector(".speechThirst").style.display = "none";
+    }
+
+    if (character.stats.energy > 50) {
+        document.querySelector(".energy").style.animation = "none";
+        document.querySelector(".speechEnergy").style.display = "none";
+    }
+
+    if (character.stats.boredom > 50) {
+        document.querySelector(".boredom").style.animation = "none";
+        document.querySelector(".speechBoredom").style.display = "none";
+    }
+
     // Character mood changes
+    if (character.stats.health <= 50) {
+        character.changeMood("sad");
+        document.querySelector(".health").style.animation = "warning 0.5s infinite";
+        document.querySelector(".speechOxygen").style.display = "block";
+    }
+
     if (character.stats.hunger <= 50) {
         character.changeMood("hungry");
+        document.querySelector(".hunger").style.animation = "warning 0.5s infinite";
+        document.querySelector(".speechHunger").style.display = "block";
     }
 
     if (character.stats.thirst <= 50) {
         character.changeMood("thirsty");
+        document.querySelector(".thirst").style.animation = "warning 0.5s infinite";
+        document.querySelector(".speechThirst").style.display = "block";
     }
 
     if (character.stats.energy <= 50) {
         character.changeMood("tired");
+        document.querySelector(".energy").style.animation = "warning 0.5s infinite";
+        document.querySelector(".speechEnergy").style.display = "block";
     }
 
     if (character.stats.boredom <= 50) {
         character.changeMood("bored");
+        document.querySelector(".boredom").style.animation = "warning 0.5s infinite";
+        document.querySelector(".speechBoredom").style.display = "block";
     }
 
     // Character stats deduction
     // Base stat deduction. (Mood = "happy")
     if (character.mood === "happy") {
-        character.stats.health -= 2;
-        character.stats.oxygen -= 2;
+        character.stats.health -= 1;
+        character.stats.oxygen -= 1;
         character.stats.hunger -= 2;
         character.stats.thirst -= 2;
-        character.stats.energy -= 2;
+        character.stats.energy -= 1;
         character.stats.boredom -= 2;
+    }
+
+    if (character.mood === "sad") {
+        character.stats.health -= 2;
+        character.stats.oxygen -= 4;
+        character.stats.hunger -= 4;
+        character.stats.thirst -= 4;
+        character.stats.energy -= 4;
+        character.stats.boredom -= 4;
     }
 
     // Tired stat deduction. (Mood = "tired")
@@ -304,9 +372,68 @@ const closeModal = () => {
 };
 
 // Refill Oxygen
+btnOxygen.addEventListener("click", () => {
+    btnOxygen.textContent = "Refilling...";
+
+    // Disable button for 0.5 seconds
+    btnOxygen.disabled = true;
+    setTimeout(() => {
+        character.refillOxygen();
+        btnOxygen.textContent = "Refill Oxygen";
+        btnOxygen.disabled = false;
+    }, 3000);
+});
 
 // Eat
+btnEat.addEventListener("click", () => {
+    btnEat.textContent = "Eating...";
+
+    // Disable button for 0.5 seconds
+    btnEat.disabled = true;
+    setTimeout(() => {
+        character.eat();
+        btnEat.textContent = "Eat Food";
+        btnEat.disabled = false;
+    }, 500);
+});
 
 // Drink
+btnDrink.addEventListener("click", () => {
+    btnDrink.textContent = "Drinking...";
+
+    // Disable button for 0.5 seconds
+    btnDrink.disabled = true;
+    setTimeout(() => {
+        character.drink();
+        btnDrink.textContent = "Drink Water";
+        btnDrink.disabled = false;
+    }, 500);
+});
 
 // Exercise
+btnExercise.addEventListener("click", () => {
+    btnExercise.textContent = "Exercising...";
+
+    // Disable button for 0.5 seconds
+    btnExercise.disabled = true;
+    setTimeout(() => {
+        character.exercise();
+        btnExercise.textContent = "Exercise";
+        btnExercise.disabled = false;
+    }, 500);
+});
+
+// Sleep
+btnSleep.addEventListener("click", () => {
+    btnSleep.textContent = "Sleeping...";
+
+    // Disable button for 0.5 seconds
+    btnSleep.disabled = true;
+    setTimeout(() => {
+        character.sleep();
+        btnSleep.textContent = "Sleep";
+        btnSleep.disabled = false;
+    }, 500);
+});
+
+gameLoop();
