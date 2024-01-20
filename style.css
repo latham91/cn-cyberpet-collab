@@ -255,6 +255,52 @@ body {
     }
 }
 
+/* CHARACTER SELECTION SCREEEN */
+.characterSelectContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: fit-content;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    max-width: 400px;
+}
+
+.cardContent {
+    h3 {
+        text-align: center;
+        font-size: 25px;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+}
+
+.descriptionContent {
+    margin-bottom: 20px;
+
+    h4 {
+        margin: 0 30px 0 0;
+        padding: 0;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+    }
+}
+
 /* UTILITY CLASSES */
 .hidden {
     display: none;
