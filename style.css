@@ -212,6 +212,95 @@ body {
     width: 250px;
 }
 
+/* GAME OVER SCREEN */
+.gameoverScreenContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameoverContent {
+    text-align: center;
+    width: 600px;
+    background-color: #3a3b5b;
+    color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+    border: 4px solid #23243b;
+    margin: 20px;
+
+    h2 {
+        margin: 0;
+        margin-bottom: 20px;
+        font-size: 60px;
+    }
+
+    p {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+
+    button:hover {
+        background-color: #23243b;
+        opacity: 0.8;
+    }
+}
+
+/* CHARACTER SELECTION SCREEEN */
+.characterSelectContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    max-width: fit-content;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    border: 4px solid rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    max-width: 400px;
+}
+
+.cardContent {
+    h3 {
+        text-align: center;
+        font-size: 25px;
+    }
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        height: 100%;
+    }
+}
+
+.descriptionContent {
+    margin-bottom: 20px;
+
+    h4 {
+        margin: 0 30px 0 0;
+        padding: 0;
+    }
+
+    p {
+        margin: 0;
+        padding: 0;
+        font-size: 18px;
+    }
+}
+
 /* UTILITY CLASSES */
 .hidden {
     display: none;
