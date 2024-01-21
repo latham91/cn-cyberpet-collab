@@ -11,6 +11,7 @@ const btnSelectReuben = document.querySelector(".btnSelectReuben");
 const gameoverScreen = document.querySelector(".gameoverScreenContainer");
 const gameScreen = document.querySelector(".gameScreenContainer");
 const characterScreen = document.querySelector(".characterSelectContainer");
+const survivalTime = document.querySelector(".survivalTime");
 
 // Constructing the character class
 class Character {
@@ -42,7 +43,7 @@ class Character {
 
         this.stats.oxygen += 50;
         this.stats.energy -= 10;
-        this.stats.health += 10;
+        this.stats.health += 20;
     }
 
     eat() {
@@ -59,7 +60,7 @@ class Character {
         }
 
         this.stats.hunger += 25;
-        this.stats.health += 10;
+        this.stats.health += 20;
         this.stats.thirst -= 10;
         this.stats.energy -= 4;
     }
@@ -78,7 +79,7 @@ class Character {
         }
 
         this.stats.thirst += 25;
-        this.stats.health += 10;
+        this.stats.health += 20;
         this.stats.hunger -= 6;
         this.stats.energy -= 6;
     }
@@ -108,20 +109,20 @@ class Character {
     }
 
     sleep() {
-        if (this.stats.energy >= 75) {
-            return (this.stats.energy = 100);
+        if (this.stats.energy >= 50) {
+            this.stats.energy = 100;
         }
 
         if (this.stats.hunger <= 25) {
-            return (this.stats.hunger = 0);
+            this.stats.hunger = 0;
         }
 
         if (this.stats.thirst <= 25) {
-            return (this.stats.thirst = 0);
+            this.stats.thirst = 0;
         }
 
         if (this.stats.boredom <= 25) {
-            return (this.stats.boredom = 0);
+            this.stats.boredom = 0;
         }
 
         this.stats.energy += 50;
@@ -166,12 +167,11 @@ class Reuben extends Character {
 // Variables
 let character; // Character variable
 let isPlaying = false; // Game is not playing by default
-let tickRate = 1000; // 1 second. (1000 milliseconds)
+let tickRate = 2000; // 1 second. (1000 milliseconds)
+let survivedTime = 0; // Time survived in seconds
 
 // Game loop
 const gameLoop = () => {
-    // TODO: Change game view to main game screen function
-
     const loop = setInterval(() => {
         // If game is not playing, stop the loop
         if (!isPlaying) {
@@ -179,6 +179,7 @@ const gameLoop = () => {
         }
 
         // Update character stats every game tick
+        survivedTime += tickRate / 1000;
         updateStats();
     }, tickRate);
 };
@@ -191,6 +192,7 @@ const startGame = () => {
 const gameOver = () => {
     gameoverScreen.style.display = "flex";
     gameScreen.style.display = "none";
+    survivalTime.textContent = `You survived for ${Math.floor(survivedTime)} seconds`;
 
     // disable all buttons
     btnOxygen.disabled = true;
@@ -213,12 +215,12 @@ const updateStats = () => {
     const boredom = document.querySelector(".boredom");
 
     // Update the character stats elements
-    health.textContent = character.stats.health;
-    oxygen.textContent = character.stats.oxygen;
-    hunger.textContent = character.stats.hunger;
-    thirst.textContent = character.stats.thirst;
-    energy.textContent = character.stats.energy;
-    boredom.textContent = character.stats.boredom;
+    health.textContent = character.stats.health <= 0 ? 0 : character.stats.health;
+    oxygen.textContent = character.stats.oxygen <= 0 ? 0 : character.stats.oxygen;
+    hunger.textContent = character.stats.hunger <= 0 ? 0 : character.stats.hunger;
+    thirst.textContent = character.stats.thirst <= 0 ? 0 : character.stats.thirst;
+    energy.textContent = character.stats.energy <= 0 ? 0 : character.stats.energy;
+    boredom.textContent = character.stats.boredom <= 0 ? 0 : character.stats.boredom;
 
     // Stat bars styling
     health.style.background = `linear-gradient(to right, #ff3838 ${character.stats.health}%, #ffffff ${character.stats.health}%)`;
@@ -308,59 +310,59 @@ const updateStats = () => {
     if (character.mood === "happy") {
         character.stats.health -= 1;
         character.stats.oxygen -= 1;
-        character.stats.hunger -= 2;
-        character.stats.thirst -= 2;
+        character.stats.hunger -= 1;
+        character.stats.thirst -= 1;
         character.stats.energy -= 1;
-        character.stats.boredom -= 2;
+        character.stats.boredom -= 1;
     }
 
     if (character.mood === "sad") {
         character.stats.health -= 2;
-        character.stats.oxygen -= 4;
-        character.stats.hunger -= 4;
-        character.stats.thirst -= 4;
-        character.stats.energy -= 4;
-        character.stats.boredom -= 4;
-    }
-
-    // Tired stat deduction. (Mood = "tired")
-    if (character.mood === "tired") {
-        character.stats.health -= 6;
-        character.stats.oxygen -= 4;
-        character.stats.hunger -= 2;
-        character.stats.thirst -= 4;
-        character.stats.energy -= 6;
-        character.stats.boredom -= 2;
-    }
-
-    // Hungry stat deduction. (Mood = "hungry")
-    if (character.mood === "hungry") {
-        character.stats.health -= 6;
-        character.stats.oxygen -= 2;
-        character.stats.hunger -= 6;
-        character.stats.thirst -= 2;
-        character.stats.energy -= 4;
-        character.stats.boredom -= 2;
-    }
-
-    // Thirsty stat deduction. (Mood = "thirsty")
-    if (character.mood === "thirsty") {
-        character.stats.health -= 6;
-        character.stats.oxygen -= 2;
-        character.stats.hunger -= 2;
-        character.stats.thirst -= 6;
-        character.stats.energy -= 4;
-        character.stats.boredom -= 2;
-    }
-
-    // Bored stat deduction. (Mood = "bored")
-    if (character.mood === "bored") {
-        character.stats.health -= 6;
         character.stats.oxygen -= 2;
         character.stats.hunger -= 2;
         character.stats.thirst -= 2;
         character.stats.energy -= 2;
-        character.stats.boredom -= 6;
+        character.stats.boredom -= 2;
+    }
+
+    // Tired stat deduction. (Mood = "tired")
+    if (character.mood === "tired") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 2;
+        character.stats.hunger -= 1;
+        character.stats.thirst -= 2;
+        character.stats.energy -= 4;
+        character.stats.boredom -= 1;
+    }
+
+    // Hungry stat deduction. (Mood = "hungry")
+    if (character.mood === "hungry") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 1;
+        character.stats.hunger -= 4;
+        character.stats.thirst -= 1;
+        character.stats.energy -= 2;
+        character.stats.boredom -= 1;
+    }
+
+    // Thirsty stat deduction. (Mood = "thirsty")
+    if (character.mood === "thirsty") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 1;
+        character.stats.hunger -= 1;
+        character.stats.thirst -= 4;
+        character.stats.energy -= 2;
+        character.stats.boredom -= 1;
+    }
+
+    // Bored stat deduction. (Mood = "bored")
+    if (character.mood === "bored") {
+        character.stats.health -= 4;
+        character.stats.oxygen -= 1;
+        character.stats.hunger -= 1;
+        character.stats.thirst -= 1;
+        character.stats.energy -= 1;
+        character.stats.boredom -= 4;
     }
 };
 
