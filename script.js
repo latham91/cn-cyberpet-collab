@@ -216,12 +216,13 @@ const updateStats = () => {
     const boredom = document.querySelector(".boredom");
 
     // Update the character stats elements
-    health.textContent = character.stats.health <= 0 ? 0 : character.stats.health;
-    oxygen.textContent = character.stats.oxygen <= 0 ? 0 : character.stats.oxygen;
-    hunger.textContent = character.stats.hunger <= 0 ? 0 : character.stats.hunger;
-    thirst.textContent = character.stats.thirst <= 0 ? 0 : character.stats.thirst;
-    energy.textContent = character.stats.energy <= 0 ? 0 : character.stats.energy;
-    boredom.textContent = character.stats.boredom <= 0 ? 0 : character.stats.boredom;
+    health.textContent = character.stats.health <= 0 ? 0 : character.stats.health > 100 ? 100 : character.stats.health;
+    oxygen.textContent = character.stats.oxygen <= 0 ? 0 : character.stats.oxygen > 100 ? 100 : character.stats.oxygen;
+    hunger.textContent = character.stats.hunger <= 0 ? 0 : character.stats.hunger > 100 ? 100 : character.stats.hunger;
+    thirst.textContent = character.stats.thirst <= 0 ? 0 : character.stats.thirst > 100 ? 100 : character.stats.thirst;
+    energy.textContent = character.stats.energy <= 0 ? 0 : character.stats.energy > 100 ? 100 : character.stats.energy;
+    boredom.textContent =
+        character.stats.boredom <= 0 ? 0 : character.stats.boredom > 100 ? 100 : character.stats.boredom;
 
     // Stat bars styling
     health.style.background = `linear-gradient(to right, #ff3838 ${character.stats.health}%, #ffffff ${character.stats.health}%)`;
