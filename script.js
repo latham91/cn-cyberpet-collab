@@ -5,8 +5,12 @@ const btnDrink = document.querySelector(".btnDrink");
 const btnExercise = document.querySelector(".btnExercise");
 const btnSleep = document.querySelector(".btnSleep");
 const btnRestart = document.querySelector(".btnRestart");
+const btnSelectAaron = document.querySelector(".btnSelectAaron");
+const btnSelectConstantin = document.querySelector(".btnSelectConstantin");
+const btnSelectReuben = document.querySelector(".btnSelectReuben");
 const gameoverScreen = document.querySelector(".gameoverScreenContainer");
 const gameScreen = document.querySelector(".gameScreenContainer");
+const characterScreen = document.querySelector(".characterSelectContainer");
 
 // Constructing the character class
 class Character {
@@ -177,6 +181,11 @@ const gameLoop = () => {
         // Update character stats every game tick
         updateStats();
     }, tickRate);
+};
+
+const startGame = () => {
+    isPlaying = true;
+    gameLoop();
 };
 
 const gameOver = () => {
@@ -355,37 +364,41 @@ const updateStats = () => {
     }
 };
 
-// Function to create a character. example: createCharacter("Aaron", "happy");
-const createCharacter = (character, baseMood) => {
-    if (character === "Aaron") {
-        if (!baseMood) {
-            character = new Aaron("happy");
-        } else {
-            character = new Aaron(baseMood);
-        }
-    }
-
-    if (character === "Constantin") {
-        if (!baseMood) {
-            character = new Constantin("happy");
-        } else {
-            character = new Constantin(baseMood);
-        }
-    }
-
-    if (character === "Reuben") {
-        if (!baseMood) {
-            character = new Reuben("happy");
-        } else {
-            character = new Reuben(baseMood);
-        }
-    }
-};
-
 // Close modal
 const closeModal = () => {
     document.querySelector(".modalBackground").style.display = "none";
 };
+
+// Select characters
+btnSelectAaron.addEventListener("click", () => {
+    character = new Aaron("happy"); // Create new character
+
+    // Start game
+    characterScreen.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+
+    startGame();
+});
+
+btnSelectReuben.addEventListener("click", () => {
+    character = new Reuben("tired"); // Create new character
+
+    // Start game
+    characterScreen.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+
+    startGame();
+});
+
+btnSelectConstantin.addEventListener("click", () => {
+    character = new Aaron("bored"); // Create new character
+
+    // Start game
+    characterScreen.classList.add("hidden");
+    gameScreen.classList.remove("hidden");
+
+    startGame();
+});
 
 // Refill Oxygen
 btnOxygen.addEventListener("click", () => {
@@ -456,5 +469,3 @@ btnSleep.addEventListener("click", () => {
 btnRestart.addEventListener("click", () => {
     window.location.reload();
 });
-
-gameLoop();
