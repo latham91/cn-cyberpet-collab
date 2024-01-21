@@ -12,6 +12,7 @@ const gameoverScreen = document.querySelector(".gameoverScreenContainer");
 const gameScreen = document.querySelector(".gameScreenContainer");
 const characterScreen = document.querySelector(".characterSelectContainer");
 const survivalTime = document.querySelector(".survivalTime");
+const characterName = document.querySelector(".characterName");
 
 // Constructing the character class
 class Character {
@@ -374,6 +375,7 @@ const closeModal = () => {
 // Select characters
 btnSelectAaron.addEventListener("click", () => {
     character = new Aaron("happy"); // Create new character
+    characterName.textContent = "Aaron";
 
     // Start game
     characterScreen.classList.add("hidden");
@@ -384,6 +386,7 @@ btnSelectAaron.addEventListener("click", () => {
 
 btnSelectReuben.addEventListener("click", () => {
     character = new Reuben("tired"); // Create new character
+    characterName.textContent = "Reuben";
 
     // Start game
     characterScreen.classList.add("hidden");
@@ -393,7 +396,8 @@ btnSelectReuben.addEventListener("click", () => {
 });
 
 btnSelectConstantin.addEventListener("click", () => {
-    character = new Aaron("bored"); // Create new character
+    character = new Constantin("bored"); // Create new character
+    characterName.textContent = "Constantin";
 
     // Start game
     characterScreen.classList.add("hidden");
