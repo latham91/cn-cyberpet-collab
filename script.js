@@ -168,7 +168,7 @@ class Reuben extends Character {
 // Variables
 let character; // Character variable
 let isPlaying = false; // Game is not playing by default
-let tickRate = 2000; // 1 second. (1000 milliseconds)
+let tickRate = 1000; // 1 second. (1000 milliseconds)
 let survivedTime = 0; // Time survived in seconds
 
 // Game loop
